@@ -1,9 +1,9 @@
 _id: req_wrk_a4b3f787b81f48e1972450b23b236501f0ad1c3e
 type: Request
 parentId: wrk_a4b3f787b81f48e1972450b23b236501
-modified: 1652796828906
+modified: 1652797692013
 created: 1652796828906
-url: "{{ base_url }}/activeModel/"
+url: "{{ base_url }}/classification/model"
 name: Get active model list
 description: ""
 method: GET
