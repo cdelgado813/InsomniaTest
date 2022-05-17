@@ -1,7 +1,7 @@
 _id: spc_c4cef466d9bb4a3c808866c258df2a28
 type: ApiSpec
 parentId: wrk_a4b3f787b81f48e1972450b23b236501
-modified: 1652796663692
+modified: 1652796717541
 created: 1652796025610
 fileName: New Document
 contents: |
@@ -86,9 +86,6 @@ contents: |
               application/json:
                 schema:
                   $ref: '#/components/schemas/User'
-          400:
-            description: Invalid username/password supplied
-            content: {}
     # ##########
     # PROJECT
     # ##########
@@ -306,35 +303,6 @@ contents: |
                     surveyId:
                       type: string
                       description: Created survey id.
-    /survey/{projectId}:
-      post: 
-        tags:
-          - survey
-        summary: Create survey for project
-        security: 
-          - bearerAuth: []
-        parameters:
-          - name: projectId
-            in: path
-            description: Unique identifier for project
-            required: true
-            style: simple
-            # explode: false
-            schema:
-              type: string
-        requestBody:
-          description: New survey
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NewSurvey'
-        responses:
-          "200":
-            description: Survey detail
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/Survey'
     /survey/{surveyId}/close:
       get: 
         tags:
