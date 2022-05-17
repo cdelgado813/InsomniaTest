@@ -1,0 +1,806 @@
+_id: spc_c4cef466d9bb4a3c808866c258df2a28
+type: ApiSpec
+parentId: wrk_a4b3f787b81f48e1972450b23b236501
+modified: 1652796663692
+created: 1652796025610
+fileName: New Document
+contents: |
+  openapi: 3.0.1
+  info:
+    title: Relevance Tag Tool
+    description: 'Web for cluster tags of Relevance campains.'
+    termsOfService: https://tagtool.relevance.com/terms/
+    contact:
+      email: oscar.mariscal@enzymeadvisinggroup.com
+    license:
+      name: Apache 2.0
+      url: http://www.apache.org/licenses/LICENSE-2.0.html
+    version: 1.0.0
+  servers:
+  - url: https://tagtool.relevance.com/v2
+  - url: http://tagtool.relevance.com/v2
+  tags:
+  - name: user
+    description: Operations about user
+  - name: project
+    description: Projects
+  - name: dictionary
+    description: Dictionaries
+  - name: survey
+    description: Surveys
+  - name: analysis
+    description: Analysis
+  - name: activeModels
+    description: Active models
+  paths:
+  # ##########
+  # USER
+  # ##########
+    /user/{userId}:
+      get:
+        tags:
+          - user
+        security: 
+          - bearerAuth: []
+        summary: Get user info
+        operationId: getUserInfo
+        parameters:
+        - name: userId
+          in: path
+          description: ID of the user
+          required: true
+          schema:
+            type: string
+        responses:
+          "200":
+            description: User data
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/User'
+    /user/auth:
+      post:
+        tags:
+          - user
+        summary: User authentication
+        security: 
+          - bearerAuth: []
+        operationId: loginUser
+        parameters:
+        - name: username
+          in: query
+          description: The user name for login
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: true
+          schema:
+            type: string
+        responses:
+          "200":
+            description: user
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/User'
+          400:
+            description: Invalid username/password supplied
+            content: {}
+    # ##########
+    # PROJECT
+    # ##########
+    /project/find:
+      post: 
+        tags:
+          - project
+        summary: Search projects
+        security: 
+          - bearerAuth: []
+        requestBody:
+          description: Search projects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSearchData'
+        responses:
+          "200":
+            description: Array of projects
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProjectSummary'
+    /project:
+      post: 
+        tags:
+          - project
+        summary: Create project
+        security: 
+          - bearerAuth: []
+        requestBody:
+          description: Create project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewProject'
+        responses:
+          "200":
+            description: Project created
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    projectId:
+                      type: string
+                      description: Created project id.
+                    surveyId:
+                      type: string
+                      description: Created survey id.
+    /project/{projectId}:
+      get: 
+        tags:
+          - project
+        summary: Get project detail
+        security: 
+          - bearerAuth: []
+        parameters:
+          - name: projectId
+            in: path
+            description: Unique identifier for project
+            required: true
+            style: simple
+            # explode: false
+            schema:
+              type: string
+        responses:
+          "200":
+            description: Project detail
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Project'
+    /project/{projectId}/close:
+      get: 
+        tags:
+          - project
+        summary: Close project
+        security: 
+          - bearerAuth: []
+        parameters:
+          - name: projectId
+            in: path
+            description: Unique identifier for project
+            required: true
+            style: simple
+            # explode: false
+            schema:
+              type: string
+        responses:
+          "200":
+            description: Project closed
+    /project/{projectId}/cancel:
+      get: 
+        tags:
+          - project
+        summary: Cancel project
+        security: 
+          - bearerAuth: []
+        parameters:
+          - name: projectId
+            in: path
+            description: Unique identifier for project
+            required: true
+            style: simple
+            # explode: false
+            schema:
+              type: string
+        responses:
+          "200":
+            description: Project cancelled
+  # ##########
+  # DICTIONARY
+  # ##########
+    /dictionary/find:
+      post: 
+        tags:
+          - dictionary
+        summary: Search dictionaries
+        security: 
+          - bearerAuth: []
+        requestBody:
+          description: Search dictionaries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DictionarySearchData'
+        responses:
+          "200":
+            description: Array of dictionaries
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DictionarySummary'
+    /dictionary:
+      post: 
+        tags:
+          - dictionary
+        summary: Create dictionary
+        security: 
+          - bearerAuth: []
+        requestBody:
+          description: Create dictionary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewDictionary'
+        responses:
+          "200":
+            description: Dictionary created
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    dictinonaryId:
+                      type: string
+                      description: Created dictionary id.
+    /dictionary/{dictionaryId}/simulation:
+      get: 
+        tags:
+          - dictionary
+        summary: Get simulation list for dictionary
+        security: 
+          - bearerAuth: []
+        parameters:
+          - name: dictionaryId
+            in: path
+            description: Unique identifier for dictionary
+            required: true
+            style: simple
+            # explode: false
+            schema:
+              type: string
+        responses:
+          "200":
+            description: Array of simulations for dictionary
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DictionarySimulation'
+  # ##########
+  # SURVEY
+  # ##########
+    /survey/{surveyId}:
+      get: 
+        tags:
+          - survey
+        summary: Get survey detail
+        security: 
+          - bearerAuth: []
+        parameters:
+          - name: surveyId
+            in: path
+            description: Unique identifier for survey
+            required: true
+            style: simple
+            # explode: false
+            schema:
+              type: string
+        responses:
+          "200":
+            description: Survey created
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    surveyId:
+                      type: string
+                      description: Created survey id.
+    /survey/{projectId}:
+      post: 
+        tags:
+          - survey
+        summary: Create survey for project
+        security: 
+          - bearerAuth: []
+        parameters:
+          - name: projectId
+            in: path
+            description: Unique identifier for project
+            required: true
+            style: simple
+            # explode: false
+            schema:
+              type: string
+        requestBody:
+          description: New survey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewSurvey'
+        responses:
+          "200":
+            description: Survey detail
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Survey'
+    /survey/{surveyId}/close:
+      get: 
+        tags:
+          - survey
+        summary: Close survey
+        security: 
+          - bearerAuth: []
+        parameters:
+          - name: surveyId
+            in: path
+            description: Unique identifier for survey
+            required: true
+            style: simple
+            # explode: false
+            schema:
+              type: string
+        responses:
+          "200":
+            description: Survey closed
+    /survey/{surveyId}/delete:
+      get: 
+        tags:
+          - survey
+        summary: Delete survey
+        security: 
+          - bearerAuth: []
+        parameters:
+          - name: surveyId
+            in: path
+            description: Unique identifier for survey
+            required: true
+            style: simple
+            # explode: false
+            schema:
+              type: string
+        responses:
+          "200":
+            description: Survey deleted
+    /survey/{surveyId}/upload:
+      post: 
+        tags:
+          - survey
+        summary: Upload survey file
+        security: 
+          - bearerAuth: []
+        parameters:
+          - name: surveyId
+            in: path
+            description: Unique identifier for survey
+            required: true
+            style: simple
+            # explode: false
+            schema:
+              type: string
+        responses:
+          "200":
+            description: Survey file uploaded
+  # ##########
+  # ACTIVE MODEL
+  # ##########
+    /activeModel/:
+      get: 
+        tags:
+          - activeModel
+        summary: Get active model list
+        security: 
+          - bearerAuth: []
+        responses:
+          "200":
+            description: Array of active models
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ActiveModel'
+  components: 
+    securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT  # optional, for documentation purposes only
+    schemas:
+      User:
+        type: object
+        properties:
+          id:
+            type: string
+          username:
+            type: string
+          firstName:
+            type: string
+          lastName:
+            type: string
+          token:
+            type: string
+      ProjectStatus: 
+        type: string
+        enum: 
+          - IN_PROGRESS
+          - CANCELLED
+          - CLOSED
+      SurveyStatus: 
+        type: string
+        enum: 
+          - IN_PROGRESS
+          - CANCELLED
+          - CLOSED
+      QuestionType: 
+        type: string
+        enum: 
+          - TAG
+          - VALORATION
+          - REASON
+          - CLOSED
+          - NO_TYPIFY
+      AnalysisStatus: 
+        type: string
+        enum: 
+          - CONFIGURING
+          - CODIFIYING
+          - CLASSIFIYING
+          - CLOSED
+          - CANCELLED
+      AnalysisType: 
+        type: string
+        enum: 
+          - TAG
+          - REASON
+      DictionaryType: 
+        type: string
+        enum: 
+          - TAG
+          - ROOT
+          - CONCEPT
+      DictionarySimulationStatus: 
+        type: string
+        enum: 
+          - IN_PROGRESS
+          - CANCELLED
+          - CLOSED
+      ProjectSummary:
+        type: object 
+        properties: 
+          id: 
+            type: string
+          name:
+            type: string
+          customer: 
+            type: string
+          language: 
+            type: string
+          startDate:
+            type: string
+            format: date-time
+          endDate:
+            type: string
+            format: date-time
+          status: 
+            $ref: "#/components/schemas/ProjectStatus"
+          surveyCounter: 
+            type: number
+          analysisCounter: 
+            type: number
+          surveyList:
+            type: array
+            items: 
+              $ref: '#/components/schemas/SurveySummary'
+          analysisList:
+            type: array
+            items: 
+              $ref: '#/components/schemas/AnalysisSummary'
+      Project:
+        type: object 
+        properties: 
+          id: 
+            type: string
+          name:
+            type: string
+          customer: 
+            type: string
+          language: 
+            type: string
+          startDate:
+            type: string
+            format: date-time
+          endDate:
+            type: string
+            format: date-time
+          status: 
+            $ref: "#/components/schemas/ProjectStatus"
+          surveyCounter: 
+            type: number
+          analysisCounter: 
+            type: number
+          surveyList: 
+            type: array
+            items: 
+              $ref: '#/components/schemas/Survey'
+          analysisList: 
+            type: array
+            items: 
+              $ref: '#/components/schemas/Analysis'
+      ProjectSearchData:
+        type: object 
+        properties: 
+          startDate:
+            type: string
+            format: date-time
+          endDate:
+            type: string
+            format: date-time    
+          customer: 
+            type: string
+          status: 
+            $ref: "#/components/schemas/ProjectStatus"
+          surveyList: 
+            type: array
+            items:
+              $ref: '#/components/schemas/Survey'
+      NewProject:
+        type: object 
+        properties: 
+          name:
+            type: string
+          customer:
+            type: string
+          surveyName: 
+            type: string
+          language: 
+            type: string
+      Survey:
+        type: object
+        properties:
+          id: 
+            type: string
+          name: 
+            type: string
+          startDate:
+            type: string
+            format: date-time
+          endDate:
+            type: string
+            format: date-time  
+          status:
+            $ref: "#/components/schemas/SurveyStatus"
+          language: 
+            type: string
+          questionCounter: 
+            type: number
+          uploadSurveyCounter: 
+            type: number
+          questionList: 
+            type: array
+            items:
+              $ref: '#/components/schemas/Question'
+          uploadHistory: 
+            type: array
+            items:
+              $ref: '#/components/schemas/SurveyUploadHistory'
+      SurveyUploadHistory:
+        properties: 
+          id: 
+            type: string
+          date:
+            type: string
+            format: date-time
+          username: 
+            type: string
+      SurveySummary:
+        properties:
+          id: 
+            type: string
+          name: 
+            type: string  
+          status:
+            $ref: "#/components/schemas/SurveyStatus"
+          questionCounter: 
+            type: number
+          uploadSurveyCounter: 
+            type: number
+      NewSurvey:
+        type: object 
+        properties: 
+          name:
+            type: string
+          language: 
+            type: string
+      Analysis:
+        type: object
+        properties:
+          id: 
+            type: string
+          name: 
+            type: string
+          type:
+            $ref: "#/components/schemas/AnalysisType"
+          status: 
+            $ref: "#/components/schemas/AnalysisStatus"
+          startDate:
+            type: string
+            format: date-time
+          endDate:
+            type: string
+            format: date-time 
+          questionCounter:
+            type: number
+          codificationPercentage:
+            type: number
+          clasificationPercentage:
+            type: number
+          questionList: 
+            type: array
+            items:
+              $ref: '#/components/schemas/Question'
+      AnalysisSummary:
+        type: object
+        properties:
+          id: 
+            type: string
+          name: 
+            type: string
+          status: 
+            $ref: "#/components/schemas/AnalysisStatus"
+          questionCounter:
+            type: number
+          codificationPercentage:
+            type: number
+          clasificationPercentage:
+            type: number
+      Question: 
+        type: object
+        properties: 
+          id: 
+            type: string
+          verbatim: 
+            type: string
+          type:
+            $ref: "#/components/schemas/QuestionType"
+          hasLinkedQuestion:
+            type: boolean
+          qualifyQuestionId: 
+            type: string
+      Dictionary: 
+        type: object
+        properties: 
+          id: 
+            type: string
+          name: 
+            type: string
+          description: 
+            type: string
+          type:
+            $ref: "#/components/schemas/DictionaryType"
+          language: 
+            type: string
+          date: 
+            type: string
+            format: date-time
+          scope: 
+            type: string
+          datasets: 
+            type: array
+            items:
+              $ref: "#/components/schemas/DictionaryDataset"
+      DictionarySummary: 
+        type: object
+        properties: 
+          id: 
+            type: string
+          name: 
+            type: string
+          description: 
+            type: string
+          type:
+            $ref: "#/components/schemas/DictionaryType"
+          language: 
+            type: string
+          date: 
+            type: string
+            format: date-time
+          scope: 
+            type: string
+      NewDictionary: 
+        type: object
+        properties: 
+          name: 
+            type: string
+          description: 
+            type: string
+          type:
+            $ref: "#/components/schemas/DictionaryType"
+          language: 
+            type: string
+          scope: 
+            type: string
+      DictionarySearchData: 
+        type: object
+        properties: 
+          name: 
+            type: string
+          type:
+            $ref: "#/components/schemas/DictionaryType"
+      DictionaryDataset: 
+        type: object
+        properties:
+          id:
+            type: string
+          active: 
+            type: boolean
+          items: 
+            type: array
+            items:
+              $ref: "#/components/schemas/DictionaryDatasetItem"
+      DictionaryDatasetItem:
+        type: object
+        properties: 
+          id: 
+            type: string
+          verbatim: 
+            type: string
+          element: 
+            type: string
+      DictionarySimulation: 
+        type: object 
+        properties: 
+          id:
+            type: string
+          name: 
+            type: string
+          status: 
+            $ref: "#/components/schemas/DictionarySimulationStatus"
+          scope: 
+            type: string
+          version: 
+            type: string
+          startDate: 
+            type: string 
+            format: date-time
+          endDate: 
+            type: string 
+            format: date-time
+      ActiveModel:
+        type: object
+        properties: 
+          id: 
+            type: string
+          name: 
+            type: string
+          scope: 
+            type: string
+          version: 
+            type: string
+          
+            
+    # securitySchemes:
+      # petstore_auth:
+        # type: oauth2
+        # flows:
+          # implicit:
+      #       authorizationUrl: http://petstore.swagger.io/oauth/dialog
+      #       scopes:
+      #         write:pets: modify pets in your account
+      #         read:pets: read your pets
+      # api_key:
+      #   type: apiKey
+      #   name: api_key
+      #   in: header
+contentType: yaml
