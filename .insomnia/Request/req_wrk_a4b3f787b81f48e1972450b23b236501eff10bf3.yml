@@ -1,0 +1,24 @@
+_id: req_wrk_a4b3f787b81f48e1972450b23b236501eff10bf3
+type: Request
+parentId: fld_wrk_a4b3f787b81f48e1972450b23b23650198f54143
+modified: 1652796828936
+created: 1652796828936
+url: "{{ base_url }}/project/{{ projectId }}/cancel"
+name: Cancel project
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1652796828936
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

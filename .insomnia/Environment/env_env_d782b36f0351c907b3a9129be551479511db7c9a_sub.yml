@@ -1,0 +1,15 @@
+_id: env_env_d782b36f0351c907b3a9129be551479511db7c9a_sub
+type: Environment
+parentId: env_d782b36f0351c907b3a9129be551479511db7c9a
+modified: 1652796828951
+created: 1652796828951
+name: OpenAPI env
+data:
+  scheme: https
+  base_path: /v2
+  host: tagtool.relevance.com
+  bearerToken: bearerToken
+dataPropertyOrder: null
+color: null
+isPrivate: false
+metaSortKey: 1652796828951

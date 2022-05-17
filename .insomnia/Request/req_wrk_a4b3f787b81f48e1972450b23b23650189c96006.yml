@@ -1,0 +1,34 @@
+_id: req_wrk_a4b3f787b81f48e1972450b23b23650189c96006
+type: Request
+parentId: fld_wrk_a4b3f787b81f48e1972450b23b23650198f54143
+modified: 1652796828939
+created: 1652796828939
+url: "{{ base_url }}/project"
+name: Create project
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "name": "string",
+      "customer": "string",
+      "surveyName": "string",
+      "language": "string"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1652796828939
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

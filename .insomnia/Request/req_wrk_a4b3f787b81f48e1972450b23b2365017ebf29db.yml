@@ -1,0 +1,35 @@
+_id: req_wrk_a4b3f787b81f48e1972450b23b2365017ebf29db
+type: Request
+parentId: fld_wrk_a4b3f787b81f48e1972450b23b236501f18bfb74
+modified: 1652796828933
+created: 1652796828933
+url: "{{ base_url }}/dictionary"
+name: Create dictionary
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "name": "string",
+      "description": "string",
+      "type": "string",
+      "language": "string",
+      "scope": "string"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1652796828933
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

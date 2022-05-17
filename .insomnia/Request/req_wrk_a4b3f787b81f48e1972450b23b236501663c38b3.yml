@@ -1,0 +1,24 @@
+_id: req_wrk_a4b3f787b81f48e1972450b23b236501663c38b3
+type: Request
+parentId: fld_wrk_a4b3f787b81f48e1972450b23b236501f18bfb74
+modified: 1652796828931
+created: 1652796828931
+url: "{{ base_url }}/dictionary/{{ dictionaryId }}/simulation"
+name: Get simulation list for dictionary
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1652796828931
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

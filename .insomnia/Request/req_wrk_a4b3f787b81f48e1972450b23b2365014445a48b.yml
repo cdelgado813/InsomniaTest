@@ -1,0 +1,24 @@
+_id: req_wrk_a4b3f787b81f48e1972450b23b2365014445a48b
+type: Request
+parentId: fld_wrk_a4b3f787b81f48e1972450b23b23650162380fcb
+modified: 1652796828926
+created: 1652796828926
+url: "{{ base_url }}/survey/{{ surveyId }}/delete"
+name: Delete survey
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1652796828926
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

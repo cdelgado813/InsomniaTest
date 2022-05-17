@@ -1,0 +1,24 @@
+_id: req_wrk_a4b3f787b81f48e1972450b23b23650108045da6
+type: Request
+parentId: fld_wrk_a4b3f787b81f48e1972450b23b23650162380fcb
+modified: 1652796828921
+created: 1652796828921
+url: "{{ base_url }}/survey/{{ surveyId }}/upload"
+name: Upload survey file
+description: ""
+method: POST
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1652796828921
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

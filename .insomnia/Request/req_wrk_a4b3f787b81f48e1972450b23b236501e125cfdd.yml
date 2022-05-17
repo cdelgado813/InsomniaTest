@@ -1,0 +1,32 @@
+_id: req_wrk_a4b3f787b81f48e1972450b23b236501e125cfdd
+type: Request
+parentId: fld_wrk_a4b3f787b81f48e1972450b23b236501f18bfb74
+modified: 1652796828934
+created: 1652796828934
+url: "{{ base_url }}/dictionary/find"
+name: Search dictionaries
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "name": "string",
+      "type": "string"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1652796828934
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

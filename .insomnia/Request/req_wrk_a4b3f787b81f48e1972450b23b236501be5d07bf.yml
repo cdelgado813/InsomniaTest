@@ -1,0 +1,58 @@
+_id: req_wrk_a4b3f787b81f48e1972450b23b236501be5d07bf
+type: Request
+parentId: fld_wrk_a4b3f787b81f48e1972450b23b23650198f54143
+modified: 1652796828940
+created: 1652796828940
+url: "{{ base_url }}/project/find"
+name: Search projects
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "startDate": "2022-05-17T14:13:48.900Z",
+      "endDate": "2022-05-17T14:13:48.900Z",
+      "customer": "string",
+      "status": "string",
+      "surveyList": [
+        {
+          "id": "string",
+          "name": "string",
+          "startDate": "2022-05-17T14:13:48.900Z",
+          "endDate": "2022-05-17T14:13:48.900Z",
+          "status": "string",
+          "language": "string",
+          "questionCounter": 0,
+          "uploadSurveyCounter": 0,
+          "questionList": [
+            {
+              "id": "string",
+              "verbatim": "string",
+              "type": "string",
+              "hasLinkedQuestion": true,
+              "qualifyQuestionId": "string"
+            }
+          ],
+          "uploadHistory": [
+            null
+          ]
+        }
+      ]
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1652796828940
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

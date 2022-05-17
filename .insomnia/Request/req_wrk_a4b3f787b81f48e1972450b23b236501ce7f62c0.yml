@@ -1,0 +1,24 @@
+_id: req_wrk_a4b3f787b81f48e1972450b23b236501ce7f62c0
+type: Request
+parentId: fld_wrk_a4b3f787b81f48e1972450b23b23650162380fcb
+modified: 1652796828928
+created: 1652796828928
+url: "{{ base_url }}/survey/{{ surveyId }}/close"
+name: Close survey
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1652796828928
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
